@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <ctx:component-scan base-package="com.first"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+        <property name="validationQuery" value="Select 1"/>
+    </bean>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan" value="com.first.controller.domain"/>
+        <property name="hibernateProperties">
+          <props>
+              <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+              <prop key="hibernate.show_sql">true</prop>
+             <prop key="hibernate.hbm2ddl.auto">update</prop>
+              <!--    <prop key="hibernate.hbm2ddl.auto">create</prop>  -->
+
+                </props>
+
+
+              </property>
+
+
+
+          </bean>
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000"/>
+    </bean>
+
+          <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+              <property name="sessionFactory" ref="sessionFactory" />
+          </bean>
+
+      <tx:annotation-driven transaction-manager="transactionManager"/>
+
+          <bean id="hostelDao" class="com.first.controller.dao.student.Studentdaoimp"/>
+
+          <bean id="hostelService" class="com.first.controller.service.studentservice.Studentserviceimp"/>
+
+
+
+          <bean id="hostelinfodao" class="com.first.controller.dao.hostelinfo.HostelInfodaoimp"/>
+
+          <bean id="hostelinfoservice" class="com.first.controller.service.hostelinfoservice.HostelInfoserviceimp"/>
+
+
+
+          <bean id="boarddao" class="com.first.controller.dao.Admin_board.Boarddaoimp"/>
+
+          <bean id="boardservice" class="com.first.controller.service.Admin_Boardservice.Boardserviceimp"/>
+
+
+          <bean id="logindao" class="com.first.controller.dao.logininfo.LoginDaoImp"/>
+
+          <bean id="loginservice" class="com.first.controller.service.loginservice.Loginserviceimp"/>
+
+
+
+          <bean id="offerdao" class="com.first.controller.dao.offers.OfferDaoImp"/>
+
+          <bean id="offerservice" class="com.first.controller.service.offerservice.Offerserviceimp"/>
+
+
+
+          <bean id="sitefeedbackdao" class="com.first.controller.dao.sitefeedback.Sitefeedbackdaoimp"/>
+
+          <bean id="sitefeedbackservice" class="com.first.controller.service.sitefeedbackservice.Sitefeedbackserviceimp"/>
+
+
+
+          <bean id="appdao" class="com.first.controller.dao.appointment.Appointmentdaoimp"/>
+
+          <bean id="appservice" class="com.first.controller.service.appointmentservice.appointmentserviceimp"/>
+
+
+          <bean id="photosdao" class="com.first.controller.dao.Photos.Hostel_photosdaoimp"/>
+
+          <bean id="photosservice" class="com.first.controller.service.Photosservice.Photosserviceimp"/>
+
+
+    <bean id="studentratedao" class="com.first.controller.dao.Student_rate.Student_ratedaoimp"/>
+
+    <bean id="studentrateservice" class="com.first.controller.service.Student_rateservice.Student_rateserviceimp"/>
+
+
+    <bean id="hostelratingdao" class="com.first.controller.dao.HostelRating.HostelRatingdaoimp"/>
+
+    <bean id="hostelratingservice" class="com.first.controller.service.HostelRatingservice.Hostelratingserviceimp"/>
+
+
+    <bean id="hostelfeedbackdao" class="com.first.controller.dao.Hostel_feedback.Hostel_feedbackdaoimp"/>
+
+    <bean id="hostelfeedbackservice" class="com.first.controller.service.Hostel_feedbackservice.Hostel_feedbackserviceimp"/>
+
+
+      </beans>
+
