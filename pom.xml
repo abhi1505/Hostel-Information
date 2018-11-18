@@ -57,7 +57,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.0.0.Final</version>
         </dependency>
-
+        <dependency>
+		   <groupId>postgresql</groupId>
+		   <artifactId>postgresql</artifactId>
+		   <version>9.4.1208-jdbc42-atlassian-hosted</version>
+		   <scope>compile</scope>
+		</dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
